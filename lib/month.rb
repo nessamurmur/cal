@@ -1,3 +1,6 @@
+require_relative './zellers_congruence'
+require_relative './year'
+
 class Month
   MONTHS = [nil, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -12,6 +15,18 @@ class Month
 
   def name
     MONTHS[@month]
+  end
+
+  def length
+    length = 30 + (@month + (@month/8).floor) % 2
+    if @month == 2
+      if Year.leap_year?(@year)
+        length -= 1
+      else
+        length -= 2
+      end
+    end
+    length
   end
 
   def to_s

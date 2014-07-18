@@ -49,4 +49,36 @@ RSpec.describe Month do
       Month.new(12, 2012).name.should == "December"
     end
   end
+  context ".length" do
+    it "should return the correct length" do
+      Month.new(3, 2012).length.should == 31
+    end
+    it "should return the correct length" do
+      Month.new(1, 1900).length.should == 31
+    end
+    it "should return the correct length" do
+      Month.new(2, 1903).length.should == 28
+    end
+    it "should return the correct length" do
+      Month.new(2, 1905).length.should == 28
+    end
+    it "should return the correct length" do
+      Month.new(2, 2004).length.should == 29
+    end
+    it "should return the correct length" do
+      Month.new(2, 2080).length.should == 29
+    end
+    it "should return the correct length" do
+      Month.new(6, 2100).length.should == 30
+    end
+    it "should return the correct length" do
+      Month.new(3, 2902).length.should == 31
+    end
+    it "should return the correct length" do
+      Month.new(6, 2904).length.should == 30
+    end
+    it "should return the correct length" do
+      Month.new(2, 2000).length.should == 29
+    end
+  end
 end
