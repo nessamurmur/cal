@@ -1,6 +1,7 @@
 require_relative '../lib/month'
 
 RSpec.describe Month do
+
   context ".header" do
     it "matches cal for December 2013" do
       month = Month.new(12, 2013)
@@ -11,6 +12,7 @@ RSpec.describe Month do
       month.header.should == "     July 1901"
     end
   end
+
   context ".name" do
     it "translates January" do
       Month.new(1, 2012).name.should == "January"
@@ -49,6 +51,7 @@ RSpec.describe Month do
       Month.new(12, 2012).name.should == "December"
     end
   end
+
   context ".length" do
     it "should return the correct length" do
       Month.new(3, 2012).length.should == 31
@@ -81,4 +84,29 @@ RSpec.describe Month do
       Month.new(2, 2000).length.should == 29
     end
   end
+
+  context ".build_first_week" do
+    it "should return a first week starting on Saturday" do
+      
+    end
+    it "should return a first week starting on Sunday" do
+
+    end
+    it "should return a first week starting on Monday" do
+
+    end
+    it "should return a first week starting on Tuesday" do
+
+    end
+    it "should return a first week starting on Wednesday" do
+
+    end
+    it "should return a first week starting on Thursday" do
+
+    end
+    it "should return a first week starting on Friday" do
+
+    end
+  end
+
 end

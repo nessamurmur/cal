@@ -6,8 +6,8 @@ class ZellersCongruence
       year -= 1
     end
 
-    answer = (1 + (((month + 1) * 26) / 10).floor + year + (year/4).floor + 6 * (year/100).floor + (year/400).floor) % 7
-    answer
+    first_day_index = (1 + ((13 * (month + 1)) / 5).floor + (year % 100) + ((year % 100)/4).floor + ((year/100)/4).floor - (2 * (year/100))) % 7
+    first_day_index
 
   end
 end
