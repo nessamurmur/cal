@@ -10,6 +10,12 @@ class Month
     @year = year
   end
 
+  def to_s
+    output = header
+    output << "\nSu Mo Tu We Th Fr Sa\n"
+    output << self.build_month
+  end
+
   def header
     "#{name} #{@year}".center(20).rstrip # automatically searches for method in class named name
   end
@@ -29,6 +35,7 @@ class Month
     end
     length
   end
+
 
   def build_month
     starting_day_index = ZellersCongruence.calculate(@month, @year)
@@ -86,12 +93,6 @@ class Month
 
     month_string
 
-  end
-
-  def to_s
-    output = header
-    output << "\nSu Mo Tu We Th Fr Sa\n"
-    output << self.build_month
   end
 
 end
