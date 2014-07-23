@@ -36,7 +36,7 @@ class Month
     length
   end
 
-  def find_days
+  def days
     self.index_days_in_month
     self.list_days_in_month
     self.push_nil_indexes_to_days_in_month_list
