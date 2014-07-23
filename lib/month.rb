@@ -3,11 +3,14 @@ require_relative './year'
 
 class Month
 
+  attr_writer :days
+
   MONTHS = [nil, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
   def initialize(month, year)
     @month = month
     @year = year
+    @days = self.build_days_array
   end
 
   def to_s
@@ -42,6 +45,7 @@ class Month
     self.push_nil_indexes_to_days_in_month_list
 
     @days = @list_days_in_month.zip(@index_days_in_month)
+    # @days << @list_days_in_month.zip(@index_days_in_month)
   end
 
   def build_month
@@ -84,6 +88,8 @@ class Month
 
   end
 
+  # private
+
   def index_days_in_month
     starting_day_index = ZellersCongruence.calculate(@month, @year)
     starting_day_index -= 1
@@ -106,6 +112,15 @@ class Month
         @list_days_in_month.unshift(nil)
       end
     end
+    # build_days_array
+  end
+
+  def build_days_array
+    self.index_days_in_month
+    self.list_days_in_month
+    self.push_nil_indexes_to_days_in_month_list
+
+    self.days = @list_days_in_month.zip(@index_days_in_month)
   end
 
 end
