@@ -3,6 +3,8 @@ require_relative './year'
 
 class Month
 
+  attr_reader :days
+
   MONTHS = [nil, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
   def initialize(month, year)
