@@ -36,29 +36,22 @@ class Month
     length
   end
 
+  def days
+    self.index_days_in_month
+    self.list_days_in_month
+    self.push_nil_indexes_to_days_in_month_list
+
+    @days = @list_days_in_month.zip(@index_days_in_month)
+  end
 
   def build_month
 
-    indexes = self.index_days_in_month
-
-    index_count = indexes.count
-
-    days_list = (1..self.length).to_a
-
-    days_list_count = days_list.count
-    if index_count > days_list_count
-      diff = index_count - days_list_count
-      diff.times do
-        days_list.unshift(nil)
-      end
-    end
-
-    days = days_list.zip(indexes)
+    self.days
 
     month_string = ""
     @carriage_count = 0
 
-    days.collect do |num, i|
+    @days.collect do |num, i|
       cell = ""
 
       if num == nil
@@ -68,7 +61,7 @@ class Month
       end
 
       if (i + 1) % 7 != 0
-        unless i == (index_count - 1)
+        unless i == (@days.count - 1)
           cell << " "
         end
       elsif (i + 1) % 7 == 0
@@ -91,8 +84,6 @@ class Month
 
   end
 
-#  private
-
   def index_days_in_month
     starting_day_index = ZellersCongruence.calculate(@month, @year)
 
@@ -101,17 +92,23 @@ class Month
       starting_day_index = 6
     end
 
-    @days_in_month_index = (0..(starting_day_index + self.length - 1)).to_a
-
-    # @days_in_month_index_count = days_index_list.count
+    @index_days_in_month = (0..(starting_day_index + self.length - 1)).to_a
   end
 
   def list_days_in_month
-
+    @list_days_in_month = (1..self.length).to_a
   end
 
-  def create_month_array
+  def push_nil_indexes_to_days_in_month_list
+    indexes_count = @index_days_in_month.count
+    actual_days_count = @list_days_in_month.count
 
+    if indexes_count > actual_days_count
+      diff = indexes_count - actual_days_count
+      diff.times do
+        @list_days_in_month.unshift(nil)
+      end
+    end
   end
 
 end

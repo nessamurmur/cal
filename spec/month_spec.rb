@@ -85,54 +85,38 @@ RSpec.describe Month do
     end
   end
 
-
-  context "#days_index_list" do
-    it "should create an array of the calendar indexes" do
+  context "#index_days_in_month" do
+    it "should create an array of the month grid's indexes" do
       month = Month.new(1, 1900)
-      month.index_days_in_month.should == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+      actual = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+      month.index_days_in_month.should == actual
     end
-    it "should create an array of the calendar indexes" do
+    it "should create an array of the month grid's indexes" do
       month = Month.new(1, 1901)
-      month.index_days_in_month.should == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+      actual = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+      month.index_days_in_month.should == actual
     end
-    it "should create an array of the calendar indexes" do
+    it "should create an array of the month grid's indexes" do
       month = Month.new(2, 2014)
-      month.index_days_in_month.should == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
+      actual = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
+      month.index_days_in_month.should == actual
     end
-    it "should create an array of the calendar indexes" do
+    it "should create an array of the month grid's indexes" do
       month = Month.new(2, 2999)
-      month.index_days_in_month.should == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+      actual = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+      month.index_days_in_month.should == actual
     end
   end
 
-
-  context "#build_month_array" do
+  context "#list_days_in_month" do
+    it "should create an array of the month's days" do
+      month = Month.new(2, 1988)
+      month.list_days_in_month.should == (1..29).to_a
+    end
     it "should return a 2D array for all of February, 2014" do
-
+      month = Month.new(2, 2100)
+      month.list_days_in_month.should == (1..28).to_a
     end
   end
 
 end
-
-
-# it "should return a first week starting on Saturday" do
-#
-# end
-# it "should return a first week starting on Sunday" do
-#
-# end
-# it "should return a first week starting on Monday" do
-#
-# end
-# it "should return a first week starting on Tuesday" do
-#
-# end
-# it "should return a first week starting on Wednesday" do
-#
-# end
-# it "should return a first week starting on Thursday" do
-#
-# end
-# it "should return a first week starting on Friday" do
-#
-# end
