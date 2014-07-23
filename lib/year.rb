@@ -27,58 +27,21 @@ class Year
 
   def build_year
     # self.build_days_array
-    self.build_january_february_march_title_line
+    self.build_months_title_line("January", "February", "March")
     self.build_weeknames_line
     # self.build_january_february_march_days_array
     # self.build_weeknames_line
     # self.build_year_array
   end
 
-  def build_january_february_march_days_array
-
-  end
-
-  def build_january_february_march_title_line
+  def build_months_title_line(month_1, month_2, month_3)
     gutter = MONTH_GUTTER.dup
     title_line = ""
-    title_line << "January".center(20)
+    title_line << month_1.center(20)
     title_line << gutter
-    title_line << "February".center(20)
+    title_line << month_2.center(20)
     title_line << gutter
-    title_line << "March".center(20).rstrip
-    title_line << "\n"
-  end
-
-  def build_april_may_june_title_line
-    gutter = MONTH_GUTTER.dup
-    title_line = ""
-    title_line << "April".center(20)
-    title_line << gutter
-    title_line << "May".center(20)
-    title_line << gutter
-    title_line << "June".center(20).rstrip
-    title_line << "\n"
-  end
-
-  def build_july_august_september_line
-    gutter = MONTH_GUTTER.dup
-    title_line = ""
-    title_line << "July".center(20)
-    title_line << gutter
-    title_line << "August".center(20)
-    title_line << gutter
-    title_line << "September".center(20).rstrip
-    title_line << "\n"
-  end
-
-  def build_october_november_december_line
-    gutter = MONTH_GUTTER.dup
-    title_line = ""
-    title_line << "October".center(20)
-    title_line << gutter
-    title_line << "November".center(20)
-    title_line << gutter
-    title_line << "December".center(20).rstrip
+    title_line << month_3.center(20).rstrip
     title_line << "\n"
   end
 

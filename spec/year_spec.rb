@@ -61,13 +61,13 @@ RSpec.describe Year do
     end
   end
 
-  context "#build_january_february_march_title_line" do
-    it "matches January February March with spaces" do
-      year = Year.new(1900)
-      actual = "      January               February               March\n"
-      year.send(:build_january_february_march_title_line).should == actual
-    end
-  end
+  # context "#build_january_february_march_title_line" do
+  #   it "matches January February March with spaces" do
+  #     year = Year.new(1900)
+  #     actual = "      January               February               March\n"
+  #     year.send(:build_january_february_march_title_line).should == actual
+  #   end
+  # end
 
 
   context "#build_days_array" do
