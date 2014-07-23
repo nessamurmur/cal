@@ -85,9 +85,30 @@ RSpec.describe Month do
     end
   end
 
+
+  context "#days_index_list" do
+    it "should create an array of the calendar indexes" do
+      month = Month.new(1, 1900)
+      month.index_days_in_month.should == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+    end
+    it "should create an array of the calendar indexes" do
+      month = Month.new(1, 1901)
+      month.index_days_in_month.should == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+    end
+    it "should create an array of the calendar indexes" do
+      month = Month.new(2, 2014)
+      month.index_days_in_month.should == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
+    end
+    it "should create an array of the calendar indexes" do
+      month = Month.new(2, 2999)
+      month.index_days_in_month.should == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+    end
+  end
+
+
   context "#build_month_array" do
     it "should return a 2D array for all of February, 2014" do
-      
+
     end
   end
 
