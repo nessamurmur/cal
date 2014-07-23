@@ -36,7 +36,7 @@ class Month
     length
   end
 
-  def days
+  def find_days
     self.index_days_in_month
     self.list_days_in_month
     self.push_nil_indexes_to_days_in_month_list
@@ -86,12 +86,10 @@ class Month
 
   def index_days_in_month
     starting_day_index = ZellersCongruence.calculate(@month, @year)
-
     starting_day_index -= 1
     if starting_day_index == -1
       starting_day_index = 6
     end
-
     @index_days_in_month = (0..(starting_day_index + self.length - 1)).to_a
   end
 
@@ -102,7 +100,6 @@ class Month
   def push_nil_indexes_to_days_in_month_list
     indexes_count = @index_days_in_month.count
     actual_days_count = @list_days_in_month.count
-
     if indexes_count > actual_days_count
       diff = indexes_count - actual_days_count
       diff.times do
