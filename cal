@@ -2,24 +2,7 @@
 
 require_relative 'lib/month'
 
-class Cal
-
-  def self.validate_year
-
-  end
-
-  def self.validate_month
-
-  end
-
-  def self.validate_number
-    unless ARGV.each.to_i.class == Fixnum
-      puts "That's not a valid input. Use numbers. Example: '7 2014' or '2014' without quotes."
-    end
-  end
-
-end
-
+# begin
 case ARGV.count
   when 2
     month = ARGV[0].to_i
@@ -32,4 +15,8 @@ case ARGV.count
     puts year.to_s
   else
     puts "This implementation of cal requires 1 argument (month) or 2 arguments (month year)."
+    exit
 end
+# rescue ArgumentError => e
+#   e.message
+# end

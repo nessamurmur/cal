@@ -16,26 +16,50 @@ class Year
   end
 
   def initialize(year)
+    unless (1800..3000).include? year
+      raise ArgumentError, "cal: year #{year} is not in range 1800..3000"
+    end
     @year = year
-    self.build_days_array
+    build_days_array
   end
 
   def to_s
     output = header
-    output << self.build_year
+    output << build_first_quarter
   end
 
-  def build_year
-    # self.build_days_array
-    self.build_months_title_line("January", "February", "March")
-    self.build_weeknames_line
-    # self.build_january_february_march_days_array
-    # self.build_weeknames_line
-    # self.build_year_array
+  def build_first_quarter
+    @quarter = ""
+    @quarter << build_months_title_line("January", "February", "March")
+    @quarter << build_weeknames_line
+    @quarter << build_first_line
+  end
+
+  def build_first_line
+    build_first_line_array
+    convert_line_to_string
+  end
+
+  def build_first_line_array
+    range = 0..6
+    @line_array = []
+    @line_array << @days[0][range]
+    @line_array << @days[1][range]
+    @line_array << @days[2][range]
+  end
+
+  def convert_line_to_string
+    temp = []
+    @line_array.flatten!(1)
+    @line_array.collect do |i|
+      temp << i[0]
+    end
+    @line_array = temp
+    @line_array.inspect
   end
 
   def build_months_title_line(month_1, month_2, month_3)
-    gutter = MONTH_GUTTER.dup
+    gutter = "  "
     title_line = ""
     title_line << month_1.center(20)
     title_line << gutter
@@ -49,10 +73,10 @@ class Year
     gutter = MONTH_GUTTER.dup
     weeknames_line = ""
     weeknames = "Su Mo Tu We Th Fr Sa"
-    weeknames_line << weeknames
-    weeknames_line << gutter
-    weeknames_line << weeknames
-    weeknames_line << gutter
+    2.times do
+      weeknames_line << weeknames
+      weeknames_line << gutter
+    end
     weeknames_line << weeknames
     weeknames_line << "\n"
   end

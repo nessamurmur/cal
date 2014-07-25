@@ -61,14 +61,32 @@ RSpec.describe Year do
     end
   end
 
-  # context "#build_january_february_march_title_line" do
-  #   it "matches January February March with spaces" do
-  #     year = Year.new(1900)
-  #     actual = "      January               February               March\n"
-  #     year.send(:build_january_february_march_title_line).should == actual
-  #   end
-  # end
-
+  context "#build_months_title_line" do
+    it "matches the first month title line, January, February, March" do
+      year = Year.new(1900)
+      output = year.build_months_title_line("January", "February", "March")
+      actual = "      January               February               March\n"
+      output.should == actual
+    end
+    it "matches the second month title line, April, May, June" do
+      year = Year.new(2000)
+      output = year.build_months_title_line("April", "May", "June")
+      actual = "       April                  May                   June\n"
+      output.should == actual
+    end
+    it "matches the third month title line, July, August, September" do
+      year = Year.new(2342)
+      output = year.build_months_title_line("July", "August", "September")
+      actual = "        July                 August              September\n"
+      output.should == actual
+    end
+    it "matches the fourth month title line, October, November, December" do
+      year = Year.new(1932)
+      output = year.build_months_title_line("October", "November", "December")
+      actual = "      October               November              December\n"
+      output.should == actual
+    end
+  end
 
   context "#build_days_array" do
     it "matches the accumulation of new month instances" do
@@ -91,5 +109,33 @@ RSpec.describe Year do
       year.should == actual
     end
   end
+
+  context "#build_weeknames_line" do
+    it "should build a string of weeknames three times" do
+      year = Year.new(2014).build_weeknames_line
+      actual = "Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa\n"
+      year.should == actual
+    end
+  end
+
+  # context "#build_first_line" do
+  #   it "should build an array of the first three month's days" do
+  #     year = Year.new(2014).build_first_line
+  #     actual = [
+  #                [[nil, 0], [nil, 1], [nil, 2], [1, 3], [2, 4], [3, 5], [4, 6]],
+  #                [[nil, 0], [nil, 1], [nil, 2], [nil, 3], [nil, 4], [nil, 5], [1, 6]],
+  #                [[nil, 0], [nil, 1], [nil, 2], [nil, 3], [nil, 4], [nil, 5], [1, 6]]
+  #              ]
+  #     year.should == actual
+  #   end
+  # end
+
+  # context "#build_first_line" do
+  #   it "should print the first line of first three months of year" do
+  #     year = Year.new(2014).build_first_line
+  #     actual = "          1  2  3  4                     1                     1"
+  #     year.should == actual
+  #   end
+  # end
 
 end
