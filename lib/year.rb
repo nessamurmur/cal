@@ -114,11 +114,7 @@ class Year
     x = temp.rindex { |v| v.class == Fixnum }
     temp.collect!.with_index do |i, index|
       if x
-        if index > x && i.nil?
-          i = ""
-        else
-          i
-        end
+        index > x && i.nil? ? i = "" : i
       else
         i = ""
       end
@@ -127,6 +123,7 @@ class Year
   end
 
   def convert_line_to_string
+    @cell_indexes = [*0..5, *7..12, *14..19]
     @line = ""
     @line_array.each_with_index do |i, index|
       if i.nil?
