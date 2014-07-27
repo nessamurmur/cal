@@ -28,11 +28,8 @@ class Year
     build_days_array
     output = header
     output << build_quarter(*MONTHS[1..3])
-    @month_count = 3
     output << build_quarter(*MONTHS[4..6])
-    @month_count = 6
     output << build_quarter(*MONTHS[7..9])
-    @month_count = 9
     output << build_quarter(*MONTHS[10..12])
   end
 
@@ -46,7 +43,7 @@ class Year
   end
 
    def header
-     "#{@year}".rjust(33) + "\n\n" # or rstrip(64)
+     "#{@year}".rjust(33) + "\n\n"
    end
 
   def build_quarter(month_1, month_2, month_3)
@@ -59,7 +56,8 @@ class Year
     build_line(21..27)
     build_line(28..34)
     build_line(35..41)
-    # puts "@line_array is #{@line_array}"
+    @month_count += 3
+    @quarter
   end
 
   def build_line(range)
