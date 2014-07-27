@@ -63,7 +63,7 @@ class Year
   def build_line(range)
     build_line_array(range)
     strip_month_day_indexes(range)
-    convert_line_to_string
+    convert_line_array_to_string
     @quarter << @line
   end
 
@@ -122,8 +122,8 @@ class Year
     @line_array = temp
   end
 
-  def convert_line_to_string
-    @cell_indexes = [*0..5, *7..12, *14..19]
+  def convert_line_array_to_string
+    # @cell_indexes = [*0..5, *7..12, *14..19]
     @line = ""
     @line_array.each_with_index do |i, index|
       if i.nil?
@@ -147,3 +147,17 @@ class Year
   end
 
 end
+
+# case index
+# when 0 || 1 || 2 || 3 || 4 || 5 || 7 || 8 || 9 || 10 || 11 || 12 || 14 || 15 || 16 || 17 || 18 || 19
+#   unless i == ""
+#     @line << CELL_GUTTER.dup
+#   end
+# when 6 || 13
+#   unless i == ""
+#     @line << MONTH_GUTTER.dup
+#   end
+# when 20
+#   @line.rstrip!
+#   @line << "\n"
+# end
