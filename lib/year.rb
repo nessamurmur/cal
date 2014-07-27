@@ -5,7 +5,6 @@ class Year
   MONTH_CELL_COUNT = 41
 
   attr_reader :days
-  # attr_accessor :month_count
 
   def self.leap_year?(year)
     @year = year
@@ -27,12 +26,23 @@ class Year
   def to_s
     @month_count = 0
     build_days_array
-    puts @days[0].to_s
     output = header
     output << build_quarter(*MONTHS[1..3])
+    @month_count = 3
     output << build_quarter(*MONTHS[4..6])
+    @month_count = 6
     output << build_quarter(*MONTHS[7..9])
+    @month_count = 9
     output << build_quarter(*MONTHS[10..12])
+  end
+
+  def build_days_array
+    @days = []
+    12.times do |i|
+      i += 1
+      @days << Month.new(i, @year).days
+    end
+    push_nil_to_end_of_months
   end
 
    def header
@@ -49,6 +59,7 @@ class Year
     build_line(21..27)
     build_line(28..34)
     build_line(35..41)
+    # puts "@line_array is #{@line_array}"
   end
 
   def build_line(range)
@@ -81,15 +92,6 @@ class Year
     weeknames_line << "\n"
   end
 
-  def build_days_array
-    @days = []
-    12.times do |i|
-      i += 1
-      @days << Month.new(i, @year).days
-    end
-    push_nil_to_end_of_months
-  end
-
  private
 
   def push_nil_to_end_of_months
@@ -100,9 +102,30 @@ class Year
 
   def build_line_array(range)
     @line_array = []
-    3.times do |i|
-      @line_array << @days[i][range]
+    if @month_count == 0
+      @line_array << @days[0][range]
+      @line_array << @days[1][range]
+      @line_array << @days[2][range]
     end
+    if @month_count == 3
+      @line_array << @days[3][range]
+      @line_array << @days[4][range]
+      @line_array << @days[5][range]
+    end
+    if @month_count == 6
+      @line_array << @days[6][range]
+      @line_array << @days[7][range]
+      @line_array << @days[8][range]
+    end
+    if @month_count == 9
+      @line_array << @days[9][range]
+      @line_array << @days[10][range]
+      @line_array << @days[11][range]
+    end
+    # else
+    #   puts "something happened with build_line_array @month_count"
+    # end
+    # @line_array
   end
 
   def strip_month_day_indexes(range)
@@ -113,10 +136,14 @@ class Year
     end
     x = temp.rindex { |v| v.class == Fixnum }
     temp.collect!.with_index do |i, index|
-      if index > x && i.nil?
-        i = ""
+      if x
+        if index > x && i.nil?
+          i = ""
+        else
+          i
+        end
       else
-        i
+        i = ""
       end
     end
     @line_array = temp
