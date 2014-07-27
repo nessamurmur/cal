@@ -88,27 +88,27 @@ RSpec.describe Year do
     end
   end
 
-  context "#build_days_array" do
-    it "matches the accumulation of new month instances" do
-      january = Month.new(1, 2000).days
-      february = Month.new(2, 2000).days
-      march = Month.new(3, 2000).days
-      april = Month.new(4, 2000).days
-      may = Month.new(5, 2000).days
-      june = Month.new(6, 2000).days
-      july = Month.new(7, 2000).days
-      august = Month.new(8, 2000).days
-      september = Month.new(9, 2000).days
-      october = Month.new(10, 2000).days
-      november = Month.new(11, 2000).days
-      december = Month.new(12, 2000).days
-
-      year = Year.new(2000).days
-
-      actual = [january, february, march, april, may, june, july, august, september, october, november, december]
-      year.should == actual
-    end
-  end
+  # context "#build_days_array" do
+  #   it "matches the accumulation of new month instances" do
+  #     january = Month.new(1, 2000).days
+  #     february = Month.new(2, 2000).days
+  #     march = Month.new(3, 2000).days
+  #     april = Month.new(4, 2000).days
+  #     may = Month.new(5, 2000).days
+  #     june = Month.new(6, 2000).days
+  #     july = Month.new(7, 2000).days
+  #     august = Month.new(8, 2000).days
+  #     september = Month.new(9, 2000).days
+  #     october = Month.new(10, 2000).days
+  #     november = Month.new(11, 2000).days
+  #     december = Month.new(12, 2000).days
+  #
+  #     year = Year.new(2000).days
+  #
+  #     actual = [january, february, march, april, may, june, july, august, september, october, november, december]
+  #     year.should == actual
+  #   end
+  # end
 
   context "#build_weeknames_line" do
     it "should build a string of weeknames three times" do
