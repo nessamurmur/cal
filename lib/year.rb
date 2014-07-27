@@ -60,13 +60,6 @@ class Year
     @quarter
   end
 
-  def build_line(range)
-    build_line_array(range)
-    strip_month_day_indexes(range)
-    convert_line_array_to_string
-    @quarter << @line
-  end
-
   def build_months_title_line(month_1, month_2, month_3)
     gutter = MONTH_GUTTER.dup
     title_line = ""
@@ -88,6 +81,13 @@ class Year
     end
     weeknames_line << weeknames
     weeknames_line << "\n"
+  end
+
+  def build_line(range)
+    build_line_array(range)
+    strip_month_day_indexes(range)
+    convert_line_array_to_string
+    @quarter << @line
   end
 
  private
@@ -123,7 +123,6 @@ class Year
   end
 
   def convert_line_array_to_string
-    # @cell_indexes = [*0..5, *7..12, *14..19]
     @line = ""
     @line_array.each_with_index do |i, index|
       if i.nil?
@@ -131,33 +130,15 @@ class Year
       elsif i.class == Fixnum
         @line << "#{i}".rjust(2)
       end
-      if (index == 0 || index == 1 || index == 2 || index == 3 || index == 4 || index == 5 || index == 7 || index == 8 || index == 9 || index == 10 || index == 11 || index == 12 || index == 14 || index == 15 || index == 16 || index == 17 || index == 18 || index == 19)
-        unless i == ""
-          @line << CELL_GUTTER.dup
-        end
-      elsif index == 6 || index == 13
-        unless i == ""
-          @line << MONTH_GUTTER.dup
-        end
-      elsif index == 20
-        @line.rstrip!
-        @line << "\n"
+      case index
+      when 0..5, 7..12, 14..19
+        i != "" ? @line << CELL_GUTTER.dup : ""
+      when 6, 13
+        i != "" ? @line << MONTH_GUTTER.dup : ""
+      when 20
+        @line = @line.rstrip + "\n"
       end
     end
   end
 
 end
-
-# case index
-# when 0 || 1 || 2 || 3 || 4 || 5 || 7 || 8 || 9 || 10 || 11 || 12 || 14 || 15 || 16 || 17 || 18 || 19
-#   unless i == ""
-#     @line << CELL_GUTTER.dup
-#   end
-# when 6 || 13
-#   unless i == ""
-#     @line << MONTH_GUTTER.dup
-#   end
-# when 20
-#   @line.rstrip!
-#   @line << "\n"
-# end
