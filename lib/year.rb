@@ -102,30 +102,9 @@ class Year
 
   def build_line_array(range)
     @line_array = []
-    if @month_count == 0
-      @line_array << @days[0][range]
-      @line_array << @days[1][range]
-      @line_array << @days[2][range]
-    end
-    if @month_count == 3
-      @line_array << @days[3][range]
-      @line_array << @days[4][range]
-      @line_array << @days[5][range]
-    end
-    if @month_count == 6
-      @line_array << @days[6][range]
-      @line_array << @days[7][range]
-      @line_array << @days[8][range]
-    end
-    if @month_count == 9
-      @line_array << @days[9][range]
-      @line_array << @days[10][range]
-      @line_array << @days[11][range]
-    end
-    # else
-    #   puts "something happened with build_line_array @month_count"
-    # end
-    # @line_array
+    @line_array << @days[@month_count][range]
+    @line_array << @days[@month_count + 1][range]
+    @line_array << @days[@month_count + 2][range]
   end
 
   def strip_month_day_indexes(range)
