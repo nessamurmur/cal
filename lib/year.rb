@@ -4,8 +4,10 @@ class Year
   CELL_GUTTER = " "
   MONTH_GUTTER = "  "
   MONTHS = [nil, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  MONTH_CELL_COUNT = 41
 
   attr_reader :days
+  attr_accessor :month_count
 
   def self.leap_year?(year)
     @year = year
@@ -26,6 +28,7 @@ class Year
   end
 
   def to_s
+    @month_count = 0
     output = header
     output << build_quarter("January", "February", "March")
     # output << build_quarter("April", "May", "June")
@@ -37,7 +40,6 @@ class Year
     @quarter = ""
     @quarter << build_months_title_line(month_1, month_2, month_3)
     @quarter << build_weeknames_line
-    @line_count = 0
     build_line(0..6)
     build_line(7..13)
     build_line(14..20)
@@ -55,25 +57,18 @@ class Year
   end
 
   def push_nil_to_end_of_months
-    @days[0].fill([nil, nil], (@days[0].length)..41)
-    @days[1].fill([nil, nil], (@days[1].length)..41)
-    @days[2].fill([nil, nil], (@days[2].length)..41)
-    # @days[3].fill([nil, nil], (@days[3].length)..41)
-    # @days[4].fill([nil, nil], (@days[4].length)..41)
-    # @days[5].fill([nil, nil], (@days[5].length)..41)
-    # @days[6].fill([nil, nil], (@days[6].length)..41)
-    # @days[7].fill([nil, nil], (@days[7].length)..41)
-    # @days[8].fill([nil, nil], (@days[8].length)..41)
-    # @days[9].fill([nil, nil], (@days[9].length)..41)
-    # @days[10].fill([nil, nil], (@days[10].length)..41)
-    # @days[11].fill([nil, nil], (@days[11].length)..41)
+    self.days.collect!.with_index do |i, index|
+      @days[index].fill([nil, nil], (@days[index].length)..MONTH_CELL_COUNT)
+    end
   end
 
   def build_line_array(range)
+    # puts @month_count.inspect
     @line_array = []
-    @line_array << @days[0][range]
-    @line_array << @days[1][range]
-    @line_array << @days[2][range]
+    @line_array << @days[@month_count][range]
+    @line_array << @days[@month_count + 1][range]
+    # puts @month_count.inspect
+    @line_array << @days[@month_count + 2][range]
   end
 
   def strip_month_day_indexes(range)
@@ -97,7 +92,6 @@ class Year
 
   def convert_line_to_string
     @line = ""
-
     @line_array.each_with_index do |i, index|
       if i.nil?
         @line << CELL.dup
@@ -117,8 +111,6 @@ class Year
         @line << "\n"
       end
     end
-
-    @line_count += 1
   end
 
   def build_months_title_line(month_1, month_2, month_3)
@@ -161,27 +153,15 @@ class Year
 
 end
 
-
-
-# unless @line_count == 0
-#   @line_array.compact!
-# end
-
-# if @line_count >= 2
-#   @line_array.collect!.compact
-# end
-
-# if @line_count <= 2
-
-# if @line_count > 2
-#   @line_array.collect!.compact
-# end
-
-# find_last_digit
-# if @line_count == 4 || @line_count == 5 || @line_count == 6 || @line_count == 7
-#   # @line_array.compact!
-# end
-
-# puts @y.to_s
-# @line_count += 1
-# puts @line_count.to_s
+# @days[0].fill([nil, nil], (@days[0].length)..MONTH_CELL_COUNT)
+# @days[1].fill([nil, nil], (@days[1].length)..MONTH_CELL_COUNT)
+# @days[2].fill([nil, nil], (@days[2].length)..MONTH_CELL_COUNT)
+# @days[3].fill([nil, nil], (@days[3].length)..MONTH_CELL_COUNT)
+# @days[4].fill([nil, nil], (@days[4].length)..MONTH_CELL_COUNT)
+# @days[5].fill([nil, nil], (@days[5].length)..MONTH_CELL_COUNT)
+# @days[6].fill([nil, nil], (@days[6].length)..MONTH_CELL_COUNT)
+# @days[7].fill([nil, nil], (@days[7].length)..MONTH_CELL_COUNT)
+# @days[8].fill([nil, nil], (@days[8].length)..MONTH_CELL_COUNT)
+# @days[9].fill([nil, nil], (@days[9].length)..MONTH_CELL_COUNT)
+# @days[10].fill([nil, nil], (@days[10].length)..MONTH_CELL_COUNT)
+# @days[11].fill([nil, nil], (@days[11].length)..MONTH_CELL_COUNT)
